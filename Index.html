@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Beautiful Erda</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #000;
+            color: #fff;
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .container {
+            text-align: center;
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+        
+        .heart-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            animation: heartReveal 2.5s ease-out forwards;
+            animation-delay: 1s;
+        }
+        
+        .heart {
+            position: relative;
+            width: 300px;
+            height: 270px;
+            margin: 0 auto;
+        }
+        
+        .heart:before, .heart:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            width: 150px;
+            height: 240px;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            border-radius: 150px 150px 0 0;
+            box-shadow: 0 0 50px rgba(255, 107, 107, 0.7);
+        }
+        
+        .heart:before {
+            left: 150px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+        
+        .heart:after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+        
+        .name {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+            opacity: 0;
+            animation: nameReveal 2s ease-in forwards;
+            animation-delay: 3s;
+        }
+        
+        .message {
+            position: absolute;
+            bottom: 20%;
+            width: 100%;
+            text-align: center;
+            font-size: 1.5rem;
+            opacity: 0;
+            animation: messageReveal 2s ease-in forwards;
+            animation-delay: 4s;
+        }
+        
+        .hearts-background {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        
+        .floating-heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 107, 107, 0.7);
+            transform: rotate(45deg);
+            opacity: 0;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .floating-heart:before, .floating-heart:after {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 107, 107, 0.7);
+            border-radius: 50%;
+            position: absolute;
+        }
+        
+        .floating-heart:before {
+            top: -10px;
+            left: 0;
+        }
+        
+        .floating-heart:after {
+            top: 0;
+            left: -10px;
+        }
+        
+        @keyframes heartReveal {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes nameReveal {
+            0% {
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0.5);
+            }
+            100% {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
+        
+        @keyframes messageReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(45deg);
+                opacity: 0;
+            }
+            10%, 90% {
+                opacity: 0.7;
+            }
+            50% {
+                transform: translateY(-20px) rotate(45deg);
+                opacity: 0.7;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heart-container">
+            <div class="heart"></div>
+            <div class="name">Erda</div>
+        </div>
+        <div class="message">
+            You are the love of my life
+        </div>
+        <div class="hearts-background" id="heartsBg"></div>
+    </div>
+
+    <script>
+        // Create floating hearts in the background
+        const heartsBg = document.getElementById('heartsBg');
+        
+        for (let i = 0; i < 30; i++) {
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            
+            // Random position
+            const left = Math.random() * 100;
+            const top = Math.random() * 100;
+            
+            heart.style.left = `${left}%`;
+            heart.style.top = `${top}%`;
+            
+            // Random animation delay and duration
+            const delay = Math.random() * 10;
+            const duration = 5 + Math.random() * 5;
+            
+            heart.style.animationDelay = `${delay}s`;
+            heart.style.animationDuration = `${duration}s`;
+            
+            heartsBg.appendChild(heart);
+        }
+    </script>
+</body>
+</html>
